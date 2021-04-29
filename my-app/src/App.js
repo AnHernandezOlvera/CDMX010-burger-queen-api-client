@@ -1,5 +1,5 @@
 import './style/App.css';
-import React from "react";
+import React,{useState} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,9 +10,17 @@ import WaiterBoard from './pages/waiter-board/waiter-board';
 import OrdersToDeliver from './pages/orders-to-deliver/orders-to-deliver';
 import NewOrder from './pages/new-order/new-order';
 import Login from './pages/login/login';
-
+import Screen from './components/ejemplo/Screen';
 
 function App() {
+  const [carrito,setCarrito]=useState({
+    client:'An Hern',
+    hora:'',
+    items:[],
+    status:'pendiente',
+    total:0
+  })
+
   return (
     <Router>
       <div className="App">
@@ -27,6 +35,10 @@ function App() {
 
         <Route path='/orders-to-deliver'>
           <OrdersToDeliver />
+        </Route>
+
+        <Route path='/screen'>
+          <Screen />
         </Route>
 
         <Route path='/'>

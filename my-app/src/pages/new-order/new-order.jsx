@@ -1,21 +1,15 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Header from '../../components/header/header'
 import './new-order.css'
-import Products from '../../components/products/products'
+import BreakfastMenu from '../../components/products/Breakfast';
+import GeneralMenu from '../../components/products/GeneralMenu';
 
 const NewOrder = () => {
-    // const [menus, setMenu] = React.useState()
-    // React.useEffect(() => {
-    //     //console.log('useEffect')
-    //     getMenu()
-    // },[])
-    // const getMenu = async () => {
-    //     const data = await fetch('https://api.sheety.co/7d28747999f75b5a4eef909ac5bef343/menu/products')
-    //     const products = await data.json()
-    //     console.log(products)
-    //     setMenu(products)
-    // }
     
+    const [desayuno,setDesayuno]=useState(true)
+
+    const handleSetComida=()=>setDesayuno(false)
+    const handleSetDesayuno=()=>setDesayuno(true)
 
     return (
         <div>
@@ -25,8 +19,8 @@ const NewOrder = () => {
                     <label className='yellow'>Nombre: </label>
                     <input type="text" id='name'/>
                 </div>
-                <button className='buttonSmall bgYellow black'>MENÚ DESAYUNO</button>
-                <button className='buttonSmall bgYellow black'>MENÚ GENERAL</button>
+                <button className='buttonSmall bgYellow black' onClick={handleSetDesayuno}>MENÚ DESAYUNO</button>
+                <button className='buttonSmall bgYellow black' onClick={handleSetComida}>MENÚ GENERAL</button>
                 <div className='date'>
                     <p className='yellow'>Fecha: 
                         <span> xx/xx/xx</span>
@@ -41,14 +35,18 @@ const NewOrder = () => {
                 <div className='menu'>
                     <p className='title-table bgYellow black'></p>
                     <div className='table-container'>
+        
                     <ul className='products-list bgWhite black'>
-                      <Products/>    
+                        <span>Producto</span>
+                        <span>Precio</span>
+                      {desayuno?<BreakfastMenu/>:<GeneralMenu/>}  
+                       
                     </ul>
                     </div>        
                 </div>
 
                 <div className='final-order'>
-                    <p className='title-table bgGreen white'>MENU DESAYUNO</p>
+                    <p className='title-table bgGreen white'>ORDEN FINAL</p>
                 </div>
 
             </div>
