@@ -10,6 +10,12 @@ const NewOrder = () => {
 
     const handleSetComida=()=>setDesayuno(false)
     const handleSetDesayuno=()=>setDesayuno(true)
+    
+    const [order, setOrder] = useState([])
+
+    const addProductOrder = (product => {
+        setOrder([...order, {name: product.name, id: product.id}])     
+    });
 
     return (
         <div>
@@ -39,7 +45,7 @@ const NewOrder = () => {
                     <ul className='products-list bgWhite black'>
                         <span>Producto</span>
                         <span>Precio</span>
-                      {desayuno?<BreakfastMenu/>:<GeneralMenu/>}  
+                      {desayuno?<BreakfastMenu callback={addProductOrder}/>:<GeneralMenu/>}  
                        
                     </ul>
                     </div>        
@@ -47,6 +53,11 @@ const NewOrder = () => {
 
                 <div className='final-order'>
                     <p className='title-table bgGreen white'>ORDEN FINAL</p>
+                    <div>
+                    {!order ? 'sin orden': order.map( product => (
+                        <p key={product.id}>{product.name}</p>
+                    ))}
+                    </div>
                 </div>
 
             </div>

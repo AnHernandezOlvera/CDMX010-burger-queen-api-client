@@ -1,7 +1,8 @@
 import React from 'react';
 import './products.css'
 
-const BreakfastMenu = () => {
+const BreakfastMenu = (props) => {
+
     const [products, setProducts] = React.useState()
     React.useEffect(() => {
         //console.log('useEffect')
@@ -13,7 +14,10 @@ const BreakfastMenu = () => {
         console.log(product)
         setProducts(product)
     }
-    
+   
+    const addProductOrder = (e) => {
+        props.callback({name: e.target.name, id: e.target.id})
+    }
     return (
         <div>
             
@@ -23,13 +27,12 @@ const BreakfastMenu = () => {
                     <li key={item.id} className='product-container'>
                         <span className='text-black'>{item.name}</span>
                         <span className='text-black'>{item.price}</span>
-                        <button className=' add bgGreen white'>+</button>
+                        <button className=' add bgGreen white'onClick={addProductOrder} id ={item.id} name={item.name}>+</button>
                     </li>
                 ))
                 }             
             </ul>
         </div>         
     );
-}
- 
+} 
 export default BreakfastMenu;
