@@ -10,11 +10,11 @@ const NewOrder = () => {
 
     const handleSetComida=()=>setDesayuno(false)
     const handleSetDesayuno=()=>setDesayuno(true)
-    
+    //Estado de ordenes
     const [order, setOrder] = useState([])
 
     const addProductOrder = (product => {
-        setOrder([...order, {name: product.name, id: product.id}])     
+        setOrder([...order, {name: product.name, id: product.id, price: product.price}])     
     });
 
     return (
@@ -55,7 +55,7 @@ const NewOrder = () => {
                     <p className='title-table bgGreen white'>ORDEN FINAL</p>
                     <div>
                     {!order ? 'sin orden': order.map( product => (
-                        <p key={product.id}>{product.name}</p>
+                        <p key={product.id}>{product.name} {product.price}</p>
                     ))}
                     </div>
                 </div>

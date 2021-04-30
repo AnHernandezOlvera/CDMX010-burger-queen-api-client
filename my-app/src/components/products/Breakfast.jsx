@@ -16,7 +16,7 @@ const BreakfastMenu = (props) => {
     }
    
     const addProductOrder = (e) => {
-        props.callback({name: e.target.name, id: e.target.id})
+        props.callback({name: e.target.name, id: e.target.id, price: e.target.dataset.price,})
     }
     return (
         <div>
@@ -27,7 +27,7 @@ const BreakfastMenu = (props) => {
                     <li key={item.id} className='product-container'>
                         <span className='text-black'>{item.name}</span>
                         <span className='text-black'>{item.price}</span>
-                        <button className=' add bgGreen white'onClick={addProductOrder} id ={item.id} name={item.name}>+</button>
+                        <button className=' add bgGreen white'onClick={addProductOrder} id ={item.id} name={item.name} data-price={item.price}>+</button>
                     </li>
                 ))
                 }             
