@@ -14,7 +14,22 @@ const NewOrder = () => {
     const [order, setOrder] = useState([])
 
     const addProductOrder = (product => {
-        setOrder([...order, {name: product.name, id: product.id, price: product.price}])     
+        if(!order.find(p => product.name === p.name)) {
+            setOrder([...order, {name: product.name, id: product.id, price: product.price}]) 
+        } else if(order.find(p => product.name === p.name)) {
+    
+                const newProduct = order.map((p) => { 
+                    
+                        return {
+                            ...p,
+                            price: 'cambio'
+                        }
+                    
+                });
+                setOrder(newProduct)
+            
+        }
+            
     });
 
     return (
