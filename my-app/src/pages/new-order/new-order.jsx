@@ -45,7 +45,7 @@ const NewOrder = () => {
                     <ul className='products-list bgWhite black'>
                         <span>Producto</span>
                         <span>Precio</span>
-                      {desayuno?<BreakfastMenu callback={addProductOrder}/>:<GeneralMenu/>}  
+                      {desayuno?<BreakfastMenu callback={addProductOrder}/>:<GeneralMenu callback={addProductOrder}/>} 
                        
                     </ul>
                     </div>        
