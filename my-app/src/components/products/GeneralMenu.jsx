@@ -1,7 +1,7 @@
 import React from 'react';
 import './products.css'
 
-const GeneralMenu = () => {
+const GeneralMenu = (props) => {
     const [products, setProducts] = React.useState()
     React.useEffect(() => {
         //console.log('useEffect')
@@ -13,6 +13,10 @@ const GeneralMenu = () => {
         console.log(product)
         setProducts(product)
     }
+
+    const addProductOrder = (e) => {
+        props.callback({name: e.target.name, id: e.target.id, price: e.target.dataset.price,})
+    }
     
     return (
         <div>
@@ -23,7 +27,7 @@ const GeneralMenu = () => {
                     <li key={item.id} className='product-container'>
                         <span className='text-black'>{item.name}</span>
                         <span className='text-black'>{item.price}</span>
-                        <button className=' add bgGreen white'>+</button>
+                        <button className=' add bgGreen white'onClick={addProductOrder} id ={item.id} name={item.name} data-price={item.price}>+</button>
                     </li>
                 ))
                 }             

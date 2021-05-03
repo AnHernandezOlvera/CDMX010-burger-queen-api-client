@@ -13,21 +13,24 @@ const NewOrder = () => {
     //Estado de ordenes
     const [order, setOrder] = useState([])
 
+    const handleUpdatePrice = (id, price) => {
+        const updateProduct = order.map((product) => {
+            if(product.id === id){
+                return {
+                    ...product,
+                    price: parseInt(product.price) + parseInt(price),
+                }
+            }
+            return product;
+        });
+        setOrder(updateProduct);
+    }
+
     const addProductOrder = (product => {
         if(!order.find(p => product.name === p.name)) {
             setOrder([...order, {name: product.name, id: product.id, price: product.price}]) 
-        } else if(order.find(p => product.name === p.name)) {
-    
-                const newProduct = order.map((p) => { 
-                    
-                        return {
-                            ...p,
-                            price: 'cambio'
-                        }
-                    
-                });
-                setOrder(newProduct)
-            
+        } else if(order.find(p => product.name === p.name)) {      
+            handleUpdatePrice(product.id, product.price);
         }
             
     });
@@ -60,7 +63,7 @@ const NewOrder = () => {
                     <ul className='products-list bgWhite black'>
                         <span>Producto</span>
                         <span>Precio</span>
-                      {desayuno?<BreakfastMenu callback={addProductOrder}/>:<GeneralMenu/>}  
+                      {desayuno?<BreakfastMenu callback={addProductOrder}/>:<GeneralMenu callback={addProductOrder}/>} 
                        
                     </ul>
                     </div>        
