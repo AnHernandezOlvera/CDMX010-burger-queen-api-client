@@ -3,7 +3,8 @@ import Header from '../../components/header/header'
 import './new-order.css'
 import BreakfastMenu from '../../components/products/Breakfast';
 import GeneralMenu from '../../components/products/GeneralMenu';
-
+import DateOrder from '../../components/Date/Date'
+import Hour from '../../components/Date/Hour'
 const NewOrder = () => {
     
     const [desayuno,setDesayuno]=useState(true)
@@ -54,20 +55,7 @@ const NewOrder = () => {
         })
         setTotalPrice(value);
     }
-
-    React.useEffect(() => {
-        //console.log('useEffect')
-        handleTotal()
-    })
-    const handleTotal = () => {
-        let value = 0;
-        order.map((product)=> {
-            value = value + (parseInt(product.price));
-            return value
-        })
-        setTotalPrice(value);
-    }
-
+    
     return (
         <div>
             <Header />
@@ -80,13 +68,11 @@ const NewOrder = () => {
                 <button className='buttonSmall bgYellow black' onClick={handleSetComida}>MENÚ GENERAL</button>
                 <div className='date'>
                     <p className='yellow'>Fecha: 
-                        <span> xx/xx/xx</span>
+                        <DateOrder/>
                     </p>
                 </div>
                 <div className='hour'>
-                    <p className='yellow'>Hora: 
-                        <span> xx:xx</span>
-                    </p>
+                    <p className='yellow'>Hora:<Hour/></p>
                 </div>
 
                 <div className='menu'>
