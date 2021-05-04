@@ -1,30 +1,63 @@
-import React,{useState} from 'react'
+import React,{ useState, useEffect } from 'react'
 import Header from '../../components/header/header'
 import './new-order.css'
 import BreakfastMenu from '../../components/products/Breakfast';
 import GeneralMenu from '../../components/products/GeneralMenu';
+import { Menu } from '../../components/menu/Menu';
 
 const NewOrder = () => {
     
-    const [desayuno,setDesayuno]=useState(true)
+    const [desayuno,setDesayuno]=useState(true);
+    const [general, setGeneral] = useState(true)
+    const [breakfastMenu, setBreakfastMenu] = useState([]);
+    const [generalMenu, setGeneralMenu] = useState([]);
+ 
 
-    const handleSetComida=()=>setDesayuno(false)
+    const handleSetComida=()=>setGeneral(false)
     const handleSetDesayuno=()=>setDesayuno(true)
     //Estado de ordenes
     const [order, setOrder] = useState([])
-    const [totalPrice, setTotalPrice] = useState(0)
+    const [totalPrice, setTotalPrice] = useState(0);
 
-    const handleRemoveProduct = (id)=>{
-        const newArrayProducts = order.filter((product) => product.id !== id);
-        setOrder(newArrayProducts)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(async() => {
+        const data = await fetch('https://api.sheety.co/7d28747999f75b5a4eef909ac5bef343/menu/products?filter[type]=desayuno')
+        const product = await data.json()
+            setBreakfastMenu(product);
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(async () => {
+        const data = await fetch('https://api.sheety.co/7d28747999f75b5a4eef909ac5bef343/menu/products?filter[type]=menú general')
+        const product = await data.json()
+        setGeneralMenu(product)
+    })
+
+    
+    const handleUpdateRemove = (id)=> {
+        const updateRemove = order.filter((product) => product.id !== id)
+        setOrder(updateRemove)
     }
+    
+    // const handleUpdateRemove = (id, price)=> {
+    //     const updateRemove = order.filter((product) => {
+    //         if(product.id !==id){
+    //             return {
+    //                 ...product,
+    //                 price: (product.price) - (price),
+    //             }
+    //         }
+        
+    //     })
+    //     setOrder(updateRemove)
+    // }
 
     const handleUpdatePrice = (id, price) => {
         const updateProduct = order.map((product) => {
             if(product.id === id){
                 return {
                     ...product,
-                    price: parseInt(product.price) + parseInt(price),
+                    price: (product.price) + (price),
                 }
             }
             return product;
@@ -36,7 +69,7 @@ const NewOrder = () => {
         if(!order.find(p => product.name === p.name)) {
             setOrder([...order, {name: product.name, id: product.id, price: parseInt(product.price)}]) 
         } else if(order.find(p => product.name === p.name)) {   
-            handleUpdatePrice(product.id, product.price );
+            handleUpdatePrice(product.id, parseInt(product.price) );
         }
             
     });
@@ -82,7 +115,9 @@ const NewOrder = () => {
                     <ul className='products-list bgWhite black'>
                         <span>Producto</span>
                         <span>Precio</span>
-                      {desayuno?<BreakfastMenu callback={addProductOrder}/>:<GeneralMenu callback={addProductOrder}/>} 
+                        {desayuno &&
+                            <Menu desayuno={desayuno} breakfastMenu={breakfastMenu} generalMenu={generalMenu}/>
+                        } 
                        
                     </ul>
                     </div>        
@@ -94,7 +129,7 @@ const NewOrder = () => {
                     {!order ? 'sin orden': order.map( product => (
                         <div key={product.id}>
                             <p >{product.name} {product.price}
-                            <button className='rest bgRed white' onClick={()=>handleRemoveProduct(product.id)} >-</button>
+                            <button className='rest bgRed white' onClick={()=>handleUpdateRemove(product.id)} >-</button>
                             </p>
                             
                         </div>

@@ -8,6 +8,7 @@ const BreakfastMenu = (props) => {
         //console.log('useEffect')
         getProducts()
     },[])
+    
     const getProducts = async () => {
         const data = await fetch('https://api.sheety.co/7d28747999f75b5a4eef909ac5bef343/menu/products?filter[type]=desayuno')
         const product = await data.json()
