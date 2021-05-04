@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import Header from '../../components/header/header'
 import './new-order.css'
 import BreakfastMenu from '../../components/products/Breakfast';
@@ -14,10 +14,12 @@ const NewOrder = () => {
     const [order, setOrder] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
 
+
     const handleRemoveProduct = (id)=>{
         const newArrayProducts = order.filter((product) => product.id !== id);
         setOrder(newArrayProducts)
     }
+
 
     const handleUpdatePrice = (id, price) => {
         const updateProduct = order.map((product) => {
@@ -40,6 +42,18 @@ const NewOrder = () => {
         }
             
     });
+    React.useEffect(() => {
+        //console.log('useEffect')
+        handleTotal()
+    })
+    const handleTotal = () => {
+        let value = 0;
+        order.map((product)=> {
+            value = value + (parseInt(product.price));
+            return value
+        })
+        setTotalPrice(value);
+    }
 
     React.useEffect(() => {
         //console.log('useEffect')
@@ -92,13 +106,16 @@ const NewOrder = () => {
                     <p className='title-table bgGreen white'>ORDEN FINAL</p>
                     <div >
                     {!order ? 'sin orden': order.map( product => (
+
                         <div key={product.id}>
                             <p >{product.name} {product.price}
                             <button className='rest bgRed white' onClick={()=>handleRemoveProduct(product.id)} >-</button>
                             </p>
                             
                         </div>
-                            
+                     
+
+                        //<p key={product.id}>{product.name} { product.price}</p>
                     ))}
                     </div>
                     <h1>{!order ? '0' : totalPrice}</h1>
