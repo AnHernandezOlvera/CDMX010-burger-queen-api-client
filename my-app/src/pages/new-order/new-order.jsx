@@ -14,6 +14,13 @@ const NewOrder = () => {
     const [order, setOrder] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
 
+
+    const handleRemoveProduct = (id)=>{
+        const newArrayProducts = order.filter((product) => product.id !== id);
+        setOrder(newArrayProducts)
+    }
+
+
     const handleUpdatePrice = (id, price) => {
         const updateProduct = order.map((product) => {
             if(product.id === id){
@@ -29,12 +36,25 @@ const NewOrder = () => {
 
     const addProductOrder = (product => {
         if(!order.find(p => product.name === p.name)) {
-            setOrder([...order, {name: product.name, id: product.id, price: product.price}]) 
-        } else if(order.find(p => product.name === p.name)) {      
-            handleUpdatePrice(product.id, product.price);
+            setOrder([...order, {name: product.name, id: product.id, price: parseInt(product.price)}]) 
+        } else if(order.find(p => product.name === p.name)) {   
+            handleUpdatePrice(product.id, product.price );
         }
             
     });
+    React.useEffect(() => {
+        //console.log('useEffect')
+        handleTotal()
+    })
+    const handleTotal = () => {
+        let value = 0;
+        order.map((product)=> {
+            value = value + (parseInt(product.price));
+            return value
+        })
+        setTotalPrice(value);
+    }
+
     React.useEffect(() => {
         //console.log('useEffect')
         handleTotal()
@@ -84,9 +104,18 @@ const NewOrder = () => {
 
                 <div className='final-order'>
                     <p className='title-table bgGreen white'>ORDEN FINAL</p>
-                    <div>
+                    <div >
                     {!order ? 'sin orden': order.map( product => (
-                        <p key={product.id}>{product.name} { product.price}</p>
+
+                        <div key={product.id}>
+                            <p >{product.name} {product.price}
+                            <button className='rest bgRed white' onClick={()=>handleRemoveProduct(product.id)} >-</button>
+                            </p>
+                            
+                        </div>
+                     
+
+                        //<p key={product.id}>{product.name} { product.price}</p>
                     ))}
                     </div>
                     <h1>{!order ? '0' : totalPrice}</h1>
