@@ -16,30 +16,34 @@ const NewOrder = () => {
     const [order, setOrder] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
   
-    const handleRemoveProduct = (id, totalPrice, price )=>{
+    const handleRemoveProduct = (id, totalPrice, price )=> {
+        if (totalPrice === price) {
+            console.log('producto eliminado');
+            const newArrayProducts = order.filter((product) =>
+            product.id !== id
+           
+        )
+        setOrder(newArrayProducts)
+        } else {
+            const remove = order.map((product) => {
+                if(product.id === id){
+                    return {
+                        ...product,
+                        totalPrice: parseInt(totalPrice) - parseInt(price),
+                        
+                    }
+                }
+                return product
+                
+            });
+            setOrder(remove)
+        }
         // const newArrayProducts = order.filter((product) =>
         // product.id !== id
         // )
-        const remove = order.map((product) => {
-            if(product.id === id){
-                return {
-                    ...product,
-                    totalPrice: parseInt(totalPrice) - parseInt(price),
-                    
-                }
-            }
-            else if(product.totalPrice <= 0){
-                console.log('producto eliminado');
-                // order.filter((product) =>
-                // product.id === id
-                
-                // )
-            }
-            return product
-            
-        });
         
-        setOrder(remove)
+        
+        //setOrder(remove)
     }
 
 
