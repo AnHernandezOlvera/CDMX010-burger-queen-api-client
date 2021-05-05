@@ -19,7 +19,7 @@ const GeneralMenu = (props) => {
     }
 
     const addProductOrder = (e) => {
-        props.callback({name: e.target.name, id: e.target.id, price: e.target.dataset.price,})
+        props.callback({name: e.target.name, id: e.target.id, totalPrice: e.target.dataset.price, price: e.target.dataset.price})
         // console.log('me diste un clcik');
         // setNumero(numero + 1);
     }
