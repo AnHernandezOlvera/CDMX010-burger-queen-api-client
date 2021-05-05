@@ -5,6 +5,7 @@ import BreakfastMenu from '../../components/products/Breakfast';
 import GeneralMenu from '../../components/products/GeneralMenu';
 import DateOrder from '../../components/Date/Date'
 import Hour from '../../components/Date/Hour'
+
 const NewOrder = () => {
     
     const [desayuno,setDesayuno]=useState(true)
@@ -14,11 +15,31 @@ const NewOrder = () => {
     //Estado de ordenes
     const [order, setOrder] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
-
-
-    const handleRemoveProduct = (id)=>{
-        const newArrayProducts = order.filter((product) => product.id !== id);
-        setOrder(newArrayProducts)
+  
+    const handleRemoveProduct = (id, totalPrice, price )=>{
+        // const newArrayProducts = order.filter((product) =>
+        // product.id !== id
+        // )
+        const remove = order.map((product) => {
+            if(product.id === id){
+                return {
+                    ...product,
+                    totalPrice: parseInt(totalPrice) - parseInt(price),
+                    
+                }
+            }
+            else if(product.totalPrice <= 0){
+                console.log('producto eliminado');
+                // order.filter((product) =>
+                // product.id === id
+                
+                // )
+            }
+            return product
+            
+        });
+        
+        setOrder(remove)
     }
 
 
@@ -27,7 +48,7 @@ const NewOrder = () => {
             if(product.id === id){
                 return {
                     ...product,
-                    price: parseInt(product.price) + parseInt(price),
+                    totalPrice: parseInt(product.totalPrice) + parseInt(price),
                 }
             }
             return product;
@@ -37,12 +58,13 @@ const NewOrder = () => {
 
     const addProductOrder = (product => {
         if(!order.find(p => product.name === p.name)) {
-            setOrder([...order, {name: product.name, id: product.id, price: parseInt(product.price)}]) 
+            setOrder([...order, {name: product.name, id: product.id, totalPrice: parseInt(product.totalPrice), price: parseInt(product.price)}]) 
         } else if(order.find(p => product.name === p.name)) {   
             handleUpdatePrice(product.id, product.price );
         }
             
     });
+
     React.useEffect(() => {
         //console.log('useEffect')
         handleTotal()
@@ -50,7 +72,7 @@ const NewOrder = () => {
     const handleTotal = () => {
         let value = 0;
         order.map((product)=> {
-            value = value + (parseInt(product.price));
+            value = value + (parseInt(product.totalPrice));
             return value
         })
         setTotalPrice(value);
@@ -94,8 +116,8 @@ const NewOrder = () => {
                     {!order ? 'sin orden': order.map( product => (
 
                         <div key={product.id}>
-                            <p >{product.name} {product.price}
-                            <button className='rest bgRed white' onClick={()=>handleRemoveProduct(product.id)} >-</button>
+                            <p >{product.name} {product.totalPrice}
+                            <button className='rest bgRed white' onClick={()=>handleRemoveProduct(product.id, product.totalPrice, product.price)} >-</button>
                             </p>
                             
                         </div>

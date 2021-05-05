@@ -1,23 +1,31 @@
-import React from 'react';
+/* eslint-disable no-sequences */
+import React, {useState} from 'react';
 import './products.css'
 
 const BreakfastMenu = (props) => {
 
     const [products, setProducts] = React.useState()
+    // const [numero, setNumero] = useState(0);
+    
+ 
+
     React.useEffect(() => {
         //console.log('useEffect')
         getProducts()
     },[])
     const getProducts = async () => {
-        const data = await fetch('https://api.sheety.co/7d28747999f75b5a4eef909ac5bef343/menu/products?filter[type]=desayuno')
+        const data = await fetch('https://api.sheety.co/28fe1198d1c3666324ccbedbaff1aa61/menu/products?filter[type]=desayuno')
         const product = await data.json()
         console.log(product)
         setProducts(product)
     }
    
     const addProductOrder = (e) => {
-        props.callback({name: e.target.name, id: e.target.id, price: e.target.dataset.price,})
+        props.callback({name: e.target.name, id: e.target.id, totalPrice: e.target.dataset.price, price: e.target.dataset.price})
+        // console.log('me diste un clic', {numero});
+        // setNumero(numero + 1);
     }
+   
     return (
         <div>
             
