@@ -12,7 +12,8 @@ const Hour = () => {
         let timeHour = newDate.getHours();
         let timeMin = newDate.getMinutes();
         let timeSec = newDate.getSeconds();
-        setTime(timeHour);
+        const timeNow = ` ${timeHour}:${timeMin}:${timeSec}`
+        setTime(timeNow);
     }
     
     return (
@@ -23,3 +24,4 @@ const Hour = () => {
 }
 
 export default Hour
+

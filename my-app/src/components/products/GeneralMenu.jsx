@@ -8,7 +8,7 @@ const GeneralMenu = (props) => {
         getProducts()
     },[])
     const getProducts = async () => {
-        const data = await fetch('https://api.sheety.co/7d28747999f75b5a4eef909ac5bef343/menu/products?filter[type]=menú general')
+        const data = await fetch('https://api.sheety.co/7efa937ced91610a35836cac784d90fd/menu/products?filter[type]=menú general')
         const product = await data.json()
         console.log(product)
         setProducts(product)
