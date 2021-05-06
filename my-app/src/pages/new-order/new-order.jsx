@@ -1,20 +1,22 @@
-import React,{useState, useEffect} from 'react'
-import Header from '../../components/header/header'
-import './new-order.css'
+import React, { useState, useEffect } from 'react';
+
+import Header from '../../components/header/header';
 import BreakfastMenu from '../../components/products/Breakfast';
 import GeneralMenu from '../../components/products/GeneralMenu';
 import DateOrder from '../../components/Date/Date'
 import Hour from '../../components/Date/Hour'
 
-const NewOrder = () => {
-    
-    const [desayuno,setDesayuno]=useState(true)
+import './new-order.css';
 
-    const handleSetComida=()=>setDesayuno(false)
-    const handleSetDesayuno=()=>setDesayuno(true)
-    //Estado de ordenes
+const NewOrder = ({products}) => {
+    const [products, setProducts] = React.useState()
+    const [desayuno,setDesayuno] =useState(true);
     const [order, setOrder] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
+
+    const handleSetComida = () => setDesayuno(false);
+    const handleSetDesayuno = () => setDesayuno(true);
+    //Estado de ordenes
   
     const handleRemoveProduct = (id, totalPrice, price )=> {
         if (totalPrice === price) {
@@ -38,12 +40,6 @@ const NewOrder = () => {
             });
             setOrder(remove)
         }
-        // const newArrayProducts = order.filter((product) =>
-        // product.id !== id
-        // )
-        
-        
-        //setOrder(remove)
     }
 
 
@@ -69,10 +65,25 @@ const NewOrder = () => {
             
     });
 
-    React.useEffect(() => {
+    const getProducts = async () => {
+        
+        const data = await fetch('https://api.sheety.co/7efa937ced91610a35836cac784d90fd/menu/products?filter[type]=desayuno')
+        
+        const product = await data.json()
+        console.log('product', product)
+        setProducts(product)
+    }
+    
+    useEffect(() => {
         //console.log('useEffect')
-        handleTotal()
-    })
+        handleTotal();
+        getProducts()
+    });
+
+    useEffect(() => {
+        getProducts()
+    });
+
     const handleTotal = () => {
         let value = 0;
         order.map((product)=> {
@@ -108,7 +119,7 @@ const NewOrder = () => {
                     <ul className='products-list bgWhite black'>
                         <span>Producto</span>
                         <span>Precio</span>
-                      {desayuno?<BreakfastMenu callback={addProductOrder}/>:<GeneralMenu callback={addProductOrder}/>} 
+                      {desayuno?<BreakfastMenu callback={addProductOrder} products={products}/>:<GeneralMenu callback={addProductOrder}/>} 
                        
                     </ul>
                     </div>        
@@ -125,9 +136,6 @@ const NewOrder = () => {
                             </p>
                             
                         </div>
-                     
-
-                        //<p key={product.id}>{product.name} { product.price}</p>
                     ))}
                     </div>
                     <h1>{!order ? '0' : totalPrice}</h1>
@@ -138,4 +146,4 @@ const NewOrder = () => {
     )
 }
 
-export default NewOrder
+export default NewOrder;

@@ -20,6 +20,7 @@ function App() {
     status:'pendiente',
     total:0
   })
+  const [products, setProducts]
 
   return (
     <Router>
@@ -30,7 +31,7 @@ function App() {
         </Route>
 
         <Route path='/new-order'>
-          <NewOrder />
+          <NewOrder products={products}/>
         </Route>
 
         <Route path='/orders-to-deliver'>

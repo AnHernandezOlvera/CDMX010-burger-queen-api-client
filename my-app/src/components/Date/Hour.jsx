@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
 const Hour = () => {
-    const [time, setTime] = React.useState()
-    React.useEffect(() => {
-        //console.log('useEffect')
+    const [time, setTime] = useState();
+
+    useEffect(() => {
         hourNow()
     },[])
 
@@ -17,11 +17,9 @@ const Hour = () => {
     }
     
     return (
-        <span>
-            {time}
-        </span>
+        <span> {time} </span>
     )
-}
+};
 
-export default Hour
+export default Hour;
 

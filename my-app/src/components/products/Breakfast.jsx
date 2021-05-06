@@ -4,23 +4,7 @@ import './products.css'
 
 const BreakfastMenu = (props) => {
 
-    const [products, setProducts] = React.useState()
-    // const [numero, setNumero] = useState(0);
     
- 
-
-    React.useEffect(() => {
-        //console.log('useEffect')
-        getProducts()
-    },[])
-    const getProducts = async () => {
-
-        const data = await fetch('https://api.sheety.co/28fe1198d1c3666324ccbedbaff1aa61/menu/products?filter[type]=desayuno')
-
-        const product = await data.json()
-        console.log(product)
-        setProducts(product)
-    }
    
     const addProductOrder = (e) => {
         props.callback({name: e.target.name, id: e.target.id, totalPrice: e.target.dataset.price, price: e.target.dataset.price})
@@ -32,8 +16,8 @@ const BreakfastMenu = (props) => {
         <div>
             
             <ul className='products-list bgWhite black'>
-                { products&&
-                products.products.map((item) => (
+                { props.products&&
+                props.products.products.map((item) => (
                     <li key={item.id} className='product-container'>
                         <span className='text-black'>{item.name}</span>
                         <span className='text-black'>{item.price}</span>
