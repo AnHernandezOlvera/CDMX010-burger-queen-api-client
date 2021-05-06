@@ -1,0 +1,136 @@
+{
+    "products": [
+        {
+          "id": 1,
+          "name": "Café americano",
+          "totalProduct": 0,
+          "price": 5,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "desayuno",
+          "category": "",
+          "dateEntry": "27-04-21"
+        },
+        {
+          "id": 2,
+          "name": "Café con leche",
+          "totalProduct": 0,
+          "price": 7,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "desayuno",
+          "category": "",
+          "dateEntry": "27-04-21"
+        },
+        {
+          "id": 3,
+          "name": "Sandwich de jamón y queso",
+          "totalProduct": 0,
+          "price": 10,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "desayuno",
+          "category": "",
+          "dateEntry": "27-04-21"
+        },
+        {
+          "id": 4,
+          "name": "Jugo de frutas natural",
+          "totalProduct": 0,
+          "price": 7,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "desayuno",
+          "category": "",
+          "dateEntry": "27-04-21"
+        },
+        {
+          "id": 5,
+          "name": "Hamburguesa simple",
+          "totalProduct": 0,
+          "price": 10,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "menú general",
+          "category": "hamburguesas",
+          "dateEntry": "27-04-21"
+        },
+        {
+          "id": 6,
+          "name": "Hamburguesa doble",
+          "totalProduct": 0,
+          "price": 15,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "menú general",
+          "category": "hamburguesas",
+          "dateEntry": "27-04-21"
+        },
+        {
+          "id": 7,
+          "name": "Papas fritas",
+          "totalProduct": 0,
+          "price": 5,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "menú general",
+          "category": "acompañamientos",
+          "dateEntry": "27-04-21"
+        },
+        {
+          "id": 8,
+          "name": "Aros de cebolla",
+          "totalProduct": 0,
+          "price": 5,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "menú general",
+          "category": "acompañamientos",
+          "dateEntry": "27-04-21"
+        },
+        {
+          "id": 9,
+          "name": "Agua 500ml",
+          "totalProduct": 0,
+          "price": 5,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "menú general",
+          "category": "bebida",
+          "dateEntry": "27-04-21"
+        },
+        {
+          "id": 10,
+          "name": "Agua 750ml",
+          "totalProduct": 0,
+          "price": 7,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "menú general",
+          "category": "bebida",
+          "dateEntry": "27-04-21"
+        },
+        {
+          "id": 11,
+          "name": "Bebida/gaseosa 500ml",
+          "totalProduct": 0,
+          "price": 7,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "menú general",
+          "category": "bebida",
+          "dateEntry": "27-04-21"
+        },
+        {
+          "id": 12,
+          "name": "Bebida/gaseosa 750ml",
+          "totalProduct": 0,
+          "price": 10,
+          "totalPrice": 0,
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
+          "type": "menú general",
+          "category": "bebida",
+          "dateEntry": "27-04-21"
+        }
+      ]
+}

@@ -1,5 +1,7 @@
-import React from 'react'
-import './login.css'
+import React from 'react';
+
+import './Login.css';
+
 const Login = () => {
     return (
         <div className="container loginContainer" >
@@ -10,5 +12,5 @@ const Login = () => {
             <input type="button" id="btnLogin" class="loginButton" value="INICIA SESIÓN"/>
         </div>
     )
-}
-export default Login
+};
+export default Login;
