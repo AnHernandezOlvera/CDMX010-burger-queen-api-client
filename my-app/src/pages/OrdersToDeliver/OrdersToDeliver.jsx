@@ -1,5 +1,8 @@
-import React from 'react'
-import Header from '../../components/header/header'
+import React from 'react';
+
+import Header from '../../components/Header/Header';
+
+import './OrdersToDeliver.css';
 
 const OrdersToDeliver = () => {
     return (
@@ -7,7 +10,7 @@ const OrdersToDeliver = () => {
             <Header />
             <h1>Orders to deliver</h1>
         </div>
-    )
-}
+    );
+};
 
-export default OrdersToDeliver
+export default OrdersToDeliver;
