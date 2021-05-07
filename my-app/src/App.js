@@ -22,14 +22,27 @@ function App() {
     total:0
   });
 
-  const updateNewOrder = (name, totalValue) => {
+  const updateNewOrder = (name, totalValue, orderItems) => {
     setCart({
       ...cart,
       client: name,
-      total: totalValue
+      total: totalValue,
+      items: orderItems,
     });
 };
 
+const handlePostNewOrder = () => {
+  let url = 'http://localhost:8000/orders';
+  let body = JSON.stringify(cart);
+  console.log(body);
+  return fetch(url, {    
+    body,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  });
+};
 
   return (
     <Router>
@@ -40,7 +53,7 @@ function App() {
         </Route>
 
         <Route path='/NewOrder'>
-          <NewOrder cart={cart} callback={updateNewOrder} />
+          <NewOrder cart={cart} callback={updateNewOrder} handlePostNewOrder = {handlePostNewOrder} />
         </Route>
 
         <Route path='/OrdersToDeliver'>

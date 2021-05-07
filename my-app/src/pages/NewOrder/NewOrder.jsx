@@ -8,7 +8,7 @@ import Hour from '../../components/Date/Hour';
 
 import './NewOrder.css';
 
-const NewOrder = ({callback, cart}) => {
+const NewOrder = ({callback, cart, handlePostNewOrder}) => {
   
     const [desayuno,setDesayuno] = useState(true);
     const [order, setOrder] = useState([]);
@@ -73,8 +73,10 @@ const NewOrder = ({callback, cart}) => {
     });
 
     const handleUpdateNewClient = e => setNewClient(e.target.value);
-    const handleUpdateOrder = (clientName, totalValue) => {
-        callback(clientName, totalValue);
+
+    const handleUpdateOrder = (clientName, totalValue, orderItems) => {
+        callback(clientName, totalValue, orderItems);
+        handlePostNewOrder();
     };
 
     return (
@@ -117,7 +119,7 @@ const NewOrder = ({callback, cart}) => {
                         ))}
                     </div>
                     <h1>{!order ? '0' : totalPrice}</h1>
-                    <button onClick={()=>handleUpdateOrder(newClient, totalPrice)}>Enviar</button>
+                    <button onClick={()=>handleUpdateOrder(newClient, totalPrice, order)}>Enviar</button>
                 </div>
             </div>
         </div>
