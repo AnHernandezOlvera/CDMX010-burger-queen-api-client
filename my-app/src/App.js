@@ -31,7 +31,7 @@ function App() {
     });
 };
 
-const handlePostNewOrder = () => {
+/* const handlePostNewOrder = () => {
   let url = 'http://localhost:8000/orders';
   let body = JSON.stringify(cart);
   console.log(body);
@@ -42,7 +42,7 @@ const handlePostNewOrder = () => {
       'Content-Type': 'application/json'
     },
   });
-};
+}; */
 
   return (
     <Router>
@@ -53,7 +53,7 @@ const handlePostNewOrder = () => {
         </Route>
 
         <Route path='/NewOrder'>
-          <NewOrder cart={cart} callback={updateNewOrder} handlePostNewOrder = {handlePostNewOrder} />
+          <NewOrder cart={cart} callback={updateNewOrder} />
         </Route>
 
         <Route path='/OrdersToDeliver'>

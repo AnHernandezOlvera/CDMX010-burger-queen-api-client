@@ -135,32 +135,39 @@
   ],
   "orders": [
     {
+      "client": "",
+      "hora": "",
+      "items": [],
+      "status": "pendiente",
+      "total": 0,
       "id": 1
     },
     {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "client": " ",
-      "hora": " ",
-      "items": [],
+      "client": "An Hernández",
+      "hora": "",
+      "items": [
+        {
+          "name": "Café americano",
+          "id": "1",
+          "totalPrice": 5,
+          "price": 5
+        },
+        {
+          "name": "Café con leche",
+          "id": "2",
+          "totalPrice": 7,
+          "price": 7
+        },
+        {
+          "name": "Sandwich de jamón y queso",
+          "id": "3",
+          "totalPrice": 10,
+          "price": 10
+        }
+      ],
       "status": "pendiente",
-      "total": 0
-    },
-    {
-      "id": 7
+      "total": 22,
+      "id": 2
     },
     {
       "client": "",
@@ -168,7 +175,90 @@
       "items": [],
       "status": "pendiente",
       "total": 0,
-      "id": 8
+      "id": 3
+    },
+    {
+      "client": "Nuevo cliente",
+      "hora": "",
+      "items": [
+        {
+          "name": "Café americano",
+          "id": "1",
+          "totalPrice": 5,
+          "price": 5
+        },
+        {
+          "name": "Sandwich de jamón y queso",
+          "id": "3",
+          "totalPrice": 10,
+          "price": 10
+        },
+        {
+          "name": "Jugo de frutas natural",
+          "id": "4",
+          "totalPrice": 7,
+          "price": 7
+        }
+      ],
+      "status": "pendiente",
+      "total": 22,
+      "id": 4
+    },
+    {
+      "client": "Nuevo cliente",
+      "hora": "",
+      "items": [
+        {
+          "name": "Café americano",
+          "id": "1",
+          "totalPrice": 5,
+          "price": 5
+        },
+        {
+          "name": "Sandwich de jamón y queso",
+          "id": "3",
+          "totalPrice": 10,
+          "price": 10
+        },
+        {
+          "name": "Jugo de frutas natural",
+          "id": "4",
+          "totalPrice": 7,
+          "price": 7
+        }
+      ],
+      "status": "pendiente",
+      "total": 22,
+      "id": 5
+    },
+    {
+      "client": "Lu",
+      "hora": "",
+      "items": [
+        {
+          "name": "Café americano",
+          "id": "1",
+          "totalPrice": 5,
+          "price": 5
+        },
+        {
+          "name": "Café con leche",
+          "id": "2",
+          "totalPrice": 7,
+          "price": 7
+        }
+      ],
+      "status": "pendiente",
+      "total": 12,
+      "id": 6
+    },
+    {
+      "client": "Lu",
+      "hora": "",
+      "items": [],
+      "status": "pendiente",
+      "total": 0,
+      "id": 7
     }
   ]
 }

@@ -8,12 +8,13 @@ import Hour from '../../components/Date/Hour';
 
 import './NewOrder.css';
 
-const NewOrder = ({callback, cart, handlePostNewOrder}) => {
+const NewOrder = ({callback}) => {
   
     const [desayuno,setDesayuno] = useState(true);
-    const [order, setOrder] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
-    const [newClient, setNewClient] = useState('');
+    const [order, setOrder] = useState([]); // items
+    const [totalPrice, setTotalPrice] = useState(0); // precio
+    const [newClient, setNewClient] = useState('');// Nombre del cliente
+
 
     useEffect(() => {
         const handleTotal = () => {
@@ -76,7 +77,28 @@ const NewOrder = ({callback, cart, handlePostNewOrder}) => {
 
     const handleUpdateOrder = (clientName, totalValue, orderItems) => {
         callback(clientName, totalValue, orderItems);
+
+        let data = {
+            client: clientName,
+            hora:'',
+            items:orderItems,
+            status:'pendiente',
+            total:totalValue,
+        }
+        const handlePostNewOrder = () => {
+            let url = 'http://localhost:8000/orders';
+            let body = JSON.stringify(data);
+            console.log(body);
+            return fetch(url, {    
+              body,
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+            });
+          };
         handlePostNewOrder();
+        setOrder([]);  
     };
 
     return (
