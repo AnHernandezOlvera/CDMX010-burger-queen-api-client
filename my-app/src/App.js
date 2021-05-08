@@ -22,12 +22,12 @@ function App() {
     total:0
   });
 
-  const updateNewOrder = (name, totalValue, orderItems) => {
+  const updateNewOrder = (product) => {
     setCart({
       ...cart,
-      client: name,
-      total: totalValue,
-      items: orderItems,
+      client: product.client,
+      total: product.total,
+      items: product.items,
     });
 };
 

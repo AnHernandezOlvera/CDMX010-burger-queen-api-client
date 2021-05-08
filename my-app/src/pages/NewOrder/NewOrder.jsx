@@ -11,35 +11,50 @@ import './NewOrder.css';
 const NewOrder = ({callback}) => {
   
     const [desayuno,setDesayuno] = useState(true);
-    const [order, setOrder] = useState([]); // items
-    const [totalPrice, setTotalPrice] = useState(0); // precio
-    const [newClient, setNewClient] = useState('');// Nombre del cliente
+    // const [order, setOrder] = useState([]); // items
+    // const [totalPrice, setTotalPrice] = useState(0); // precio
+    // const [newClient, setNewClient] = useState('');// Nombre del cliente
+    const [cart, setCart] = useState({
+        client:'',
+        hora:'',
+        items:[],
+        status:'pendiente',
+        total:0
+      });
 
+    const handleSetComida = () => setDesayuno(false);
+    const handleSetDesayuno = () => setDesayuno(true);
+    const handleUpdateNewClient = e => setCart({
+        ...cart,
+        client: e.target.value,
+    });
+   
 
     useEffect(() => {
         const handleTotal = () => {
             let value = 0;
-            order.map((product)=> {
+            cart.items.map((product)=> {
                 value = value + (parseInt(product.totalPrice));
                 return value;
             });
-            setTotalPrice(value);
+            setCart({
+                ...cart, total: value
+            });
         };
         handleTotal();
-    });
+    },[]);
 
-    const handleSetComida = () => setDesayuno(false);
-    const handleSetDesayuno = () => setDesayuno(true);
+
   
     const handleRemoveProduct = (id, totalPrice, price ) => {
         if (totalPrice === price) {
             console.log('producto eliminado');
-            const newArrayProducts = order.filter((product) =>
+            const newArrayProducts = cart.items.filter((product) =>
             product.id !== id
         )
-        setOrder(newArrayProducts)
+        setCart(newArrayProducts)
         } else {
-            const remove = order.map((product) => {
+            const remove = cart.items.map((product) => {
                 if(product.id === id) {
                     return {
                         ...product,
@@ -48,47 +63,55 @@ const NewOrder = ({callback}) => {
                 };
                 return product;              
             });
-            setOrder(remove);
+            setCart(remove);
         };
     };
 
     const handleUpdatePrice = (id, price) => {
-        const updateProduct = order.map((product) => {
+        const items = cart.items;
+        console.log(items);
+        const updateProduct = items.map((product) => {
             if(product.id === id) {
                 return {
-                    ...product,
-                    totalPrice: parseInt(product.totalPrice) + parseInt(price),
+                    ...product, totalPrice: parseInt(product.totalPrice) + parseInt(price), 
                 };
-            };
+            }else{
+                console.log('no funciona');
+            }
             return product;
         });
-        setOrder(updateProduct);
+        setCart({
+            ...cart,
+            items: updateProduct,
+         });
     };
 
     const addProductOrder = (product => {
-        if(!order.find(p => product.name === p.name)) {
-            setOrder([...order, {name: product.name, id: product.id, totalPrice: parseInt(product.totalPrice), price: parseInt(product.price)}]); 
-        } else if(order.find(p => product.name === p.name)) {   
+        const items =cart.items;
+        if(!items.find(p => product.name === p.name)) {
+            setCart({
+                ...cart,
+                items: [...items, {name: product.name, id: product.id, totalPrice: parseInt(product.totalPrice), price: parseInt(product.price)}],
+            }) 
+        } else if(items.find(p => product.name === p.name)) {      
             handleUpdatePrice(product.id, product.price);
         };        
     });
 
-    const handleUpdateNewClient = e => setNewClient(e.target.value);
-
-    const handleUpdateOrder = (clientName, totalValue, orderItems) => {
-        callback(clientName, totalValue, orderItems);
-
+    
+    const handleUpdateOrder = (parametro) => {
+        callback(parametro);
+        
         let data = {
-            client: clientName,
-            hora:'',
-            items:orderItems,
+            client: cart.client,
+            hora: cart.hora,
+            items:cart.items,
             status:'pendiente',
-            total:totalValue,
+            total:cart.total,
         }
         const handlePostNewOrder = () => {
             let url = 'http://localhost:8000/orders';
             let body = JSON.stringify(data);
-            console.log(body);
             return fetch(url, {    
               body,
               method: 'POST',
@@ -98,7 +121,7 @@ const NewOrder = ({callback}) => {
             });
           };
         handlePostNewOrder();
-        setOrder([]);  
+        //setCart([]);  
     };
 
     return (
@@ -132,16 +155,16 @@ const NewOrder = ({callback}) => {
                 <div className='final-order'>
                     <p className='title-table bgGreen white'>ORDEN FINAL</p>
                     <div>
-                        {!order ? 'sin orden': order.map( product => (
+                        {!cart.items ? 'sin orden': cart.items.map( product => (
                             <div key={product.id}>
-                                <p>{product.name} {product.totalPrice}
+                                <p key={product.id}>{product.name} {product.totalPrice}
                                     <button className='rest bgRed white' onClick={()=>handleRemoveProduct(product.id, product.totalPrice, product.price)} >-</button>
                                 </p>
                             </div>
                         ))}
                     </div>
-                    <h1>{!order ? '0' : totalPrice}</h1>
-                    <button onClick={()=>handleUpdateOrder(newClient, totalPrice, order)}>Enviar</button>
+                    <h1>{!cart.items ? '0' : cart.total}</h1>
+                    <button onClick={()=>handleUpdateOrder(cart)}>Enviar</button>
                 </div>
             </div>
         </div>
