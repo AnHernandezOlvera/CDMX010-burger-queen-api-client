@@ -19,7 +19,7 @@ const NewOrder = ({callback}) => {
         hora:'',
         items:[],
         status:'pendiente',
-        total:0
+        total:0,
       });
 
     const handleSetComida = () => setDesayuno(false);
@@ -30,20 +30,29 @@ const NewOrder = ({callback}) => {
     });
    
 
-    useEffect(() => {
-        const handleTotal = () => {
-            let value = 0;
-            cart.items.map((product)=> {
-                value = value + (parseInt(product.totalPrice));
-                return value;
-            });
-            setCart({
-                ...cart, total: value
-            });
-        };
-        handleTotal();
-    },[]);
-
+    // useEffect(() => {
+    //     const handleTotal = () => {
+    //         let value = 0;
+    //         const items = cart.items;
+    //         console.log(items, 'hola');
+    //         items.map((product)=> {
+    //             console.log(product, 'hola');
+    //             value = value + (parseInt(product.totalPrice));
+    //             return value;
+    //         });
+    //         setCart({
+    //             ...cart, total: value
+    //         });
+    //     };
+    //     handleTotal();
+    // },[]);
+    // useEffect(() => {
+    //     const handleTotal = () => {
+    //         let value = 0;
+    //         console.log(cart.items);
+    //     }
+    //     handleTotal();
+    // },[])
 
   
     const handleRemoveProduct = (id, totalPrice, price ) => {
@@ -52,7 +61,7 @@ const NewOrder = ({callback}) => {
             const newArrayProducts = cart.items.filter((product) =>
             product.id !== id
         )
-        setCart(newArrayProducts)
+        setCart({...cart, items: newArrayProducts, total:cart.total-parseInt(price)})
         } else {
             const remove = cart.items.map((product) => {
                 if(product.id === id) {
@@ -63,7 +72,7 @@ const NewOrder = ({callback}) => {
                 };
                 return product;              
             });
-            setCart(remove);
+            setCart({...cart, items: remove, total:cart.total-parseInt(price)});
         };
     };
 
@@ -83,6 +92,7 @@ const NewOrder = ({callback}) => {
         setCart({
             ...cart,
             items: updateProduct,
+            total: cart.total += parseInt(price)
          });
     };
 
@@ -92,6 +102,7 @@ const NewOrder = ({callback}) => {
             setCart({
                 ...cart,
                 items: [...items, {name: product.name, id: product.id, totalPrice: parseInt(product.totalPrice), price: parseInt(product.price)}],
+                total: cart.total+= parseInt(product.totalPrice)
             }) 
         } else if(items.find(p => product.name === p.name)) {      
             handleUpdatePrice(product.id, product.price);
@@ -121,7 +132,7 @@ const NewOrder = ({callback}) => {
             });
           };
         handlePostNewOrder();
-        //setCart([]);  
+        setCart([]);  
     };
 
     return (
