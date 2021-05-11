@@ -11,9 +11,10 @@ import './NewOrder.css';
 const NewOrder = ({callback}) => {
   
     const [desayuno,setDesayuno] = useState(true);
-    const [cart, setCart] = useState({
+    const [waiterCart, setWaiterCart] = useState({
         client:'',
         hora:'',
+        date:'',
         items:[],
         status:'pendiente',
         total:0,
@@ -21,20 +22,20 @@ const NewOrder = ({callback}) => {
 
     const handleSetComida = () => setDesayuno(false);
     const handleSetDesayuno = () => setDesayuno(true);
-    const handleUpdateNewClient = e => setCart({
-        ...cart,
+    const handleUpdateNewClient = e => setWaiterCart({
+        ...waiterCart,
         client: e.target.value,
     });
   
     const handleRemoveProduct = (id, totalPrice, price ) => {
         if (totalPrice === price) {
             console.log('producto eliminado');
-            const newArrayProducts = cart.items.filter((product) =>
+            const newArrayProducts = waiterCart.items.filter((product) =>
             product.id !== id
         )
-        setCart({...cart, items: newArrayProducts, total:cart.total-parseInt(price)})
+        setWaiterCart({...waiterCart, items: newArrayProducts, total:waiterCart.total-parseInt(price)})
         } else {
-            const remove = cart.items.map((product) => {
+            const remove = waiterCart.items.map((product) => {
                 if(product.id === id) {
                     return {
                         ...product,
@@ -43,12 +44,12 @@ const NewOrder = ({callback}) => {
                 };
                 return product;              
             });
-            setCart({...cart, items: remove, total:cart.total-parseInt(price)});
+            setWaiterCart({...waiterCart, items: remove, total:waiterCart.total-parseInt(price)});
         };
     };
 
     const handleUpdatePrice = (id, price) => {
-        const items = cart.items;
+        const items = waiterCart.items;
         console.log(items);
         const updateProduct = items.map((product) => {
             if(product.id === id) {
@@ -60,20 +61,20 @@ const NewOrder = ({callback}) => {
             }
             return product;
         });
-        setCart({
-            ...cart,
+        setWaiterCart({
+            ...waiterCart,
             items: updateProduct,
-            total: cart.total += parseInt(price)
+            total: waiterCart.total += parseInt(price)
          });
     };
 
     const addProductOrder = (product => {
-        const items =cart.items;
+        const items =waiterCart.items;
         if(!items.find(p => product.name === p.name)) {
-            setCart({
-                ...cart,
+            setWaiterCart({
+                ...waiterCart,
                 items: [...items, {name: product.name, id: product.id, totalPrice: parseInt(product.totalPrice), price: parseInt(product.price)}],
-                total: cart.total+= parseInt(product.totalPrice)
+                total: waiterCart.total+= parseInt(product.totalPrice)
             }) 
         } else if(items.find(p => product.name === p.name)) {      
             handleUpdatePrice(product.id, product.price);
@@ -86,6 +87,7 @@ const NewOrder = ({callback}) => {
         let data = {
             client: finalCart.client,
             hora: finalCart.hora,
+            date: finalCart.date,
             items:finalCart.items,
             status:'pendiente',
             total:finalCart.total,
@@ -103,14 +105,33 @@ const NewOrder = ({callback}) => {
           };
          
         handlePostNewOrder();
-        setCart({
+        setWaiterCart({
         client:'',
         hora:'',
+        date:'',
         items:[],
         status:'pendiente',
         total:0,
         })
+      
     };
+    const handleDate = () => {
+        let dateNow='';
+        const DateOrder = () => {
+            let newDate = new Date();
+            let date = newDate.getDate();
+            let month = newDate.getMonth()+1;
+            let year = newDate.getFullYear();
+            dateNow = `${date}/${month}/${year}`
+            setWaiterCart({
+                ...waiterCart,
+                hora: dateNow,
+            })
+        };
+        DateOrder();
+        return dateNow;
+    };
+
     const handleHour = () => {
         let timeNow='';
         const hourNow = () => {
@@ -119,8 +140,8 @@ const NewOrder = ({callback}) => {
             let timeMin = newDate.getMinutes();
             let timeSec = newDate.getSeconds();
             timeNow = ` ${timeHour}:${timeMin}:${timeSec}`;
-            setCart({
-                ...cart,
+            setWaiterCart({
+                ...waiterCart,
                 hora: timeNow,
             })
         };
@@ -129,12 +150,17 @@ const NewOrder = ({callback}) => {
     };
     const handleClick = async () => {
         const time = await handleHour();
+        const date = handleDate();
         const finalCart = {
-            ...cart,
+            ...waiterCart,
             hora: time,
+            date: date
         }
         handleUpdateOrder(finalCart);
+        
     }
+
+
 
     return (
         <div>
@@ -142,7 +168,7 @@ const NewOrder = ({callback}) => {
             <div className='grid'>
                 <div id='clientName'>
                     <label className='yellow'>Nombre: </label>
-                    <input type="text" id='name' onChange={handleUpdateNewClient} />
+                        <input type="text" id='name'  onChange={handleUpdateNewClient} value={waiterCart.client}/>    
                 </div>
                 <button className='buttonSmall bgYellow black' onClick={handleSetDesayuno}>MENÚ DESAYUNO</button>
                 <button className='buttonSmall bgYellow black' onClick={handleSetComida}>MENÚ GENERAL</button>
@@ -167,7 +193,7 @@ const NewOrder = ({callback}) => {
                 <div className='final-order'>
                     <p className='title-table bgGreen white'>ORDEN FINAL</p>
                     <div>
-                        {!cart.items ? 'sin orden': cart.items.map( product => (
+                        {!waiterCart.items ? 'sin orden': waiterCart.items.map( product => (
                             <div key={product.id}>
                                 <p key={product.id}>{product.name} {product.totalPrice}
                                     <button className='rest bgRed white' onClick={()=>handleRemoveProduct(product.id, product.totalPrice, product.price)} >-</button>
@@ -175,7 +201,7 @@ const NewOrder = ({callback}) => {
                             </div>
                         ))}
                     </div>
-                    <h1>{!cart.items ? '0' : cart.total}</h1>
+                    <h1>{!waiterCart.items ? '0' : waiterCart.total}</h1>
                     <button onClick={(e)=>handleClick()}>Enviar</button>
                 </div>
             </div>
