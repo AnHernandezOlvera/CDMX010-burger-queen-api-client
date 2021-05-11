@@ -112,10 +112,9 @@ const NewOrder = ({callback}) => {
     
     const handleUpdateOrder = (parametro) => {
         callback(parametro);
-        
         let data = {
             client: cart.client,
-            hora: cart.hora,
+            hora: cart.hour,
             items:cart.items,
             status:'pendiente',
             total:cart.total,
@@ -131,9 +130,27 @@ const NewOrder = ({callback}) => {
               },
             });
           };
+         
         handlePostNewOrder();
-        setCart([]);  
     };
+    const handleHour = () => {
+        const hourNow = () => {
+            let newDate = new Date();
+            let timeHour = newDate.getHours();
+            let timeMin = newDate.getMinutes();
+            let timeSec = newDate.getSeconds();
+            const timeNow = ` ${timeHour}:${timeMin}:${timeSec}`;
+            setCart({
+                ...cart,
+                hora: timeNow,
+            });  
+        };
+        hourNow();
+    };
+    const handleClick = () => {
+        handleHour();
+        handleUpdateOrder(cart);
+    }
 
     return (
         <div>
@@ -175,7 +192,7 @@ const NewOrder = ({callback}) => {
                         ))}
                     </div>
                     <h1>{!cart.items ? '0' : cart.total}</h1>
-                    <button onClick={()=>handleUpdateOrder(cart)}>Enviar</button>
+                    <button onClick={(e)=>handleClick()}>Enviar</button>
                 </div>
             </div>
         </div>
