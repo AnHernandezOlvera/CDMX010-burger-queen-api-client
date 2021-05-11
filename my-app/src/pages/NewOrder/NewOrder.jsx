@@ -11,9 +11,6 @@ import './NewOrder.css';
 const NewOrder = ({callback}) => {
   
     const [desayuno,setDesayuno] = useState(true);
-    // const [order, setOrder] = useState([]); // items
-    // const [totalPrice, setTotalPrice] = useState(0); // precio
-    // const [newClient, setNewClient] = useState('');// Nombre del cliente
     const [cart, setCart] = useState({
         client:'',
         hora:'',
@@ -28,32 +25,6 @@ const NewOrder = ({callback}) => {
         ...cart,
         client: e.target.value,
     });
-   
-
-    // useEffect(() => {
-    //     const handleTotal = () => {
-    //         let value = 0;
-    //         const items = cart.items;
-    //         console.log(items, 'hola');
-    //         items.map((product)=> {
-    //             console.log(product, 'hola');
-    //             value = value + (parseInt(product.totalPrice));
-    //             return value;
-    //         });
-    //         setCart({
-    //             ...cart, total: value
-    //         });
-    //     };
-    //     handleTotal();
-    // },[]);
-    // useEffect(() => {
-    //     const handleTotal = () => {
-    //         let value = 0;
-    //         console.log(cart.items);
-    //     }
-    //     handleTotal();
-    // },[])
-
   
     const handleRemoveProduct = (id, totalPrice, price ) => {
         if (totalPrice === price) {
@@ -110,14 +81,14 @@ const NewOrder = ({callback}) => {
     });
 
     
-    const handleUpdateOrder = (parametro) => {
-        callback(parametro);
+    const handleUpdateOrder = (finalCart) => {
+        callback(finalCart);
         let data = {
-            client: cart.client,
-            hora: cart.hour,
-            items:cart.items,
+            client: finalCart.client,
+            hora: finalCart.hora,
+            items:finalCart.items,
             status:'pendiente',
-            total:cart.total,
+            total:finalCart.total,
         }
         const handlePostNewOrder = () => {
             let url = 'http://localhost:8000/orders';
@@ -132,24 +103,37 @@ const NewOrder = ({callback}) => {
           };
          
         handlePostNewOrder();
+        setCart({
+        client:'',
+        hora:'',
+        items:[],
+        status:'pendiente',
+        total:0,
+        })
     };
     const handleHour = () => {
+        let timeNow='';
         const hourNow = () => {
             let newDate = new Date();
             let timeHour = newDate.getHours();
             let timeMin = newDate.getMinutes();
             let timeSec = newDate.getSeconds();
-            const timeNow = ` ${timeHour}:${timeMin}:${timeSec}`;
+            timeNow = ` ${timeHour}:${timeMin}:${timeSec}`;
             setCart({
                 ...cart,
                 hora: timeNow,
-            });  
+            })
         };
         hourNow();
+        return timeNow;
     };
-    const handleClick = () => {
-        handleHour();
-        handleUpdateOrder(cart);
+    const handleClick = async () => {
+        const time = await handleHour();
+        const finalCart = {
+            ...cart,
+            hora: time,
+        }
+        handleUpdateOrder(finalCart);
     }
 
     return (
