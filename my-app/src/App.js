@@ -25,6 +25,7 @@ function App() {
   const updateNewOrder = (product) => {
     setCart({
       ...cart,
+      hora: product.hora,
       client: product.client,
       total: product.total,
       items: product.items,
