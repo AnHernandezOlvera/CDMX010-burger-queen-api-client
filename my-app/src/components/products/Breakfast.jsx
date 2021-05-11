@@ -33,7 +33,7 @@ const BreakfastMenu = (props) => {
                         <button className=' add bgGreen white'onClick={addProductOrder} id ={item.id} name={item.name} data-price={item.price}>+</button>
                     </li>
                 ))
-                };             
+                }             
             </ul>
         </div>         
     );
