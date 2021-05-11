@@ -17,33 +17,22 @@ function App() {
   const [cart, setCart] = useState({
     client:'',
     hora:'',
+    date:'',
     items:[],
     status:'pendiente',
     total:0
   });
 
-  const updateNewOrder = (product) => {
+  const updateNewOrder = (finalCart) => {
     setCart({
       ...cart,
-      hora: product.hora,
-      client: product.client,
-      total: product.total,
-      items: product.items,
+      hora: finalCart.hora,
+      date: finalCart.date,
+      client: finalCart.client,
+      total: finalCart.total,
+      items: finalCart.items,
     });
 };
-
-/* const handlePostNewOrder = () => {
-  let url = 'http://localhost:8000/orders';
-  let body = JSON.stringify(cart);
-  console.log(body);
-  return fetch(url, {    
-    body,
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-  });
-}; */
 
   return (
     <Router>

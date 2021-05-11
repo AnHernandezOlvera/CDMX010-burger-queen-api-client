@@ -134,59 +134,6 @@
     }
   ],
   "orders": [
-    {
-      "client": "",
-      "hora": " 10:35:52",
-      "items": [
-        {
-          "name": "Café americano",
-          "id": "1",
-          "totalPrice": 5,
-          "price": 5
-        },
-        {
-          "name": "Café con leche",
-          "id": "2",
-          "totalPrice": 7,
-          "price": 7
-        },
-        {
-          "name": "Sandwich de jamón y queso",
-          "id": "3",
-          "totalPrice": 10,
-          "price": 10
-        }
-      ],
-      "status": "pendiente",
-      "total": 22,
-      "id": 1
-    },
-    {
-      "client": "AN",
-      "hora": " 10:37:38",
-      "items": [
-        {
-          "name": "Café americano",
-          "id": "1",
-          "totalPrice": 5,
-          "price": 5
-        },
-        {
-          "name": "Café con leche",
-          "id": "2",
-          "totalPrice": 7,
-          "price": 7
-        },
-        {
-          "name": "Sandwich de jamón y queso",
-          "id": "3",
-          "totalPrice": 10,
-          "price": 10
-        }
-      ],
-      "status": "pendiente",
-      "total": 22,
-      "id": 2
-    }
+    
   ]
 }
