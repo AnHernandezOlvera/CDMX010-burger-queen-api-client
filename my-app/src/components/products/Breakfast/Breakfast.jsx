@@ -1,7 +1,7 @@
 /* eslint-disable no-sequences */
 import React, {useState, useEffect} from 'react';
 
-import './Products.css';
+import '../../Products/Products.css';
 
 const BreakfastMenu = (props) => {
 
