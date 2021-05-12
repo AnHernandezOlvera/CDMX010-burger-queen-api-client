@@ -175,9 +175,9 @@ const NewOrder = ({callback}) => {
                 <div className='date'>
                     <p className='yellow'>Fecha: <DateOrder/></p>                   
                 </div>
-                <div className='hour'>
+                {/* <div className='hour'>
                     <p className='yellow'>Hora: <Hour/></p>
-                </div>
+                </div> */}
                 {/* MENU TABLE */}
                 <div className='menu'>
                     <p className='title-table bgYellow black'></p>
