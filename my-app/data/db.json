@@ -135,37 +135,9 @@
   ],
   "orders": [
     {
-      "client": "prueba hora",
-      "hora": " 12:49:21",
-      "date": "11/5/2021",
-      "items": [
-        {
-          "name": "Café americano",
-          "id": "1",
-          "totalPrice": 5,
-          "price": 5
-        },
-        {
-          "name": "Café con leche",
-          "id": "2",
-          "totalPrice": 7,
-          "price": 7
-        },
-        {
-          "name": "Sandwich de jamón y queso",
-          "id": "3",
-          "totalPrice": 10,
-          "price": 10
-        }
-      ],
-      "status": "pendiente",
-      "total": 22,
-      "id": 1
-    },
-    {
-      "client": "prueba 12:49",
-      "hora": " 12:49:38",
-      "date": "11/5/2021",
+      "client": "Lu Rojas",
+      "hora": " 11:11:39",
+      "date": "12/5/2021",
       "items": [
         {
           "name": "Café americano",
@@ -182,44 +154,7 @@
       ],
       "status": "pendiente",
       "total": 12,
-      "id": 2
-    },
-    {
-      "client": "prueba 12:50",
-      "hora": " 12:50:26",
-      "date": "11/5/2021",
-      "items": [],
-      "status": "pendiente",
-      "total": 0,
-      "id": 3
-    },
-    {
-      "client": "prueba sin hora",
-      "hora": " 12:51:31",
-      "date": "11/5/2021",
-      "items": [
-        {
-          "name": "Café americano",
-          "id": "1",
-          "totalPrice": 5,
-          "price": 5
-        },
-        {
-          "name": "Café con leche",
-          "id": "2",
-          "totalPrice": 7,
-          "price": 7
-        },
-        {
-          "name": "Sandwich de jamón y queso",
-          "id": "3",
-          "totalPrice": 10,
-          "price": 10
-        }
-      ],
-      "status": "pendiente",
-      "total": 22,
-      "id": 4
+      "id": 1
     }
   ]
 }

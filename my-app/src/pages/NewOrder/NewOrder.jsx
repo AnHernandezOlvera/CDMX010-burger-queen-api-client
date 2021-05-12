@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 
 import Header from '../../components/Header/Header';
-import BreakfastMenu from '../../components/Products/Breakfast';
+import BreakfastMenu from '../../components/Products/Breakfast/Breakfast';
 import GeneralMenu from '../../components/Products/GeneralMenu';
 import DateOrder from '../../components/Date/DateOrder';
 import Hour from '../../components/Date/Hour';
